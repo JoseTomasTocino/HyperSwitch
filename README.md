@@ -1,4 +1,12 @@
-# HyperSwitch
+<p align="center">
+  <img src="Assets/HyperSwitch-icon.png" width="180" alt="Icono de HyperSwitch">
+</p>
+
+<h1 align="center">HyperSwitch</h1>
+
+<p align="center">
+  <strong>Cambia con un clic entre WSL, Docker y Hyper-V o VirtualBox, VMware y máquinas virtuales clásicas en Windows 11.</strong>
+</p>
 
 ![HyperSwitch en inglés](docs/images/hyperswitch-en.png)
 
