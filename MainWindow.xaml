@@ -30,93 +30,31 @@
                        Foreground="{StaticResource PrimaryTextBrush}"
                        HorizontalAlignment="Center" />
 
-            <Border Grid.Row="1"
-                    Margin="54,28,54,0"
-                    Padding="11,9,11,13"
-                    CornerRadius="31"
-                    BorderBrush="#8793A3"
-                    BorderThickness="1.5">
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#DCE3EC" Offset="0" />
-                        <GradientStop Color="#7E8998" Offset="0.45" />
-                        <GradientStop Color="#3E4857" Offset="0.73" />
-                        <GradientStop Color="#98A3B1" Offset="1" />
-                    </LinearGradientBrush>
-                </Border.Background>
-                <Border.Effect>
-                    <DropShadowEffect Color="#35465C" BlurRadius="22" ShadowDepth="8" Opacity="0.35" />
-                </Border.Effect>
-                <Border Padding="5"
-                        CornerRadius="24"
-                        Background="#172130"
-                        BorderBrush="#303C4C"
-                        BorderThickness="1">
-                    <Grid Height="166">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-
-                        <Rectangle Width="4"
-                                   HorizontalAlignment="Center"
-                                   Fill="#0B111B"
-                                   Panel.ZIndex="0" />
-
-                        <RadioButton x:Name="WslModeOption"
+            <Grid Grid.Row="1" Margin="35,18,35,0" Height="220">
+                <Image x:Name="RockerImage"
+                       Source="/Assets/rocker-wsl.png"
+                       Stretch="Uniform"
+                       RenderOptions.BitmapScalingMode="HighQuality"
+                       IsHitTestVisible="False" />
+                <Grid Margin="34,24,34,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <RadioButton x:Name="WslModeOption"
                                  Grid.Column="0"
-                                 Margin="0,0,4,0"
                                  GroupName="HypervisorMode"
-                                 Style="{StaticResource ModeOptionStyle}"
+                                 Style="{StaticResource RockerHitAreaStyle}"
                                  Checked="ModeOption_Checked"
-                                 AutomationProperties.Name="Modo WSL">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Border Width="68" Height="68" CornerRadius="34" Background="#22FFFFFF">
-                                <TextBlock Text="WSL"
-                                           FontSize="20"
-                                           FontWeight="Bold"
-                                           Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center" />
-                            </Border>
-                            <TextBlock Text="Hipervisor activo"
-                                       Margin="0,12,0,0"
-                                       FontSize="14"
-                                       FontWeight="SemiBold"
-                                       Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
-                                       HorizontalAlignment="Center" />
-                        </StackPanel>
-                        </RadioButton>
-
-                        <RadioButton x:Name="VmModeOption"
+                                 AutomationProperties.Name="Modo WSL" />
+                    <RadioButton x:Name="VmModeOption"
                                  Grid.Column="1"
-                                 Margin="4,0,0,0"
                                  GroupName="HypervisorMode"
-                                 Style="{StaticResource ModeOptionStyle}"
+                                 Style="{StaticResource RockerHitAreaStyle}"
                                  Checked="ModeOption_Checked"
-                                 AutomationProperties.Name="Modo máquinas virtuales">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Border Width="68" Height="68" CornerRadius="12" Background="#16000000">
-                                <Grid Width="42" Height="34">
-                                    <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
-                                            BorderThickness="4"
-                                            CornerRadius="3" />
-                                    <Rectangle Width="18" Height="4"
-                                               Margin="0,35,0,0"
-                                               Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
-                                </Grid>
-                            </Border>
-                            <TextBlock Text="Hipervisor desactivado"
-                                       Margin="0,12,0,0"
-                                       FontSize="14"
-                                       FontWeight="SemiBold"
-                                       Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
-                                       HorizontalAlignment="Center" />
-                        </StackPanel>
-                        </RadioButton>
-                    </Grid>
-                </Border>
-            </Border>
+                                 AutomationProperties.Name="Modo máquinas virtuales" />
+                </Grid>
+            </Grid>
 
             <Grid Grid.Row="2" Margin="65,22,65,0">
                 <Grid.ColumnDefinitions>

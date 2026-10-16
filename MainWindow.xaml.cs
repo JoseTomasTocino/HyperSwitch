@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using HyperSwitch.Models;
 using HyperSwitch.Services;
 
@@ -7,6 +8,9 @@ namespace HyperSwitch;
 
 public partial class MainWindow : Window
 {
+    private static readonly BitmapImage WslRockerImage = LoadRockerImage("rocker-wsl.png");
+    private static readonly BitmapImage VmRockerImage = LoadRockerImage("rocker-vm.png");
+
     private readonly HypervisorMode _currentMode;
     private HypervisorMode? _configuredMode;
     private bool _isInitializing = true;
@@ -38,6 +42,8 @@ public partial class MainWindow : Window
 
     private void UpdateSelectionState()
     {
+        RockerImage.Source = SelectedMode == HypervisorMode.Wsl ? WslRockerImage : VmRockerImage;
+
         var configuredMode = _configuredMode ?? _currentMode;
         var changed = SelectedMode != configuredMode;
         ApplyButton.IsEnabled = changed;
@@ -111,6 +117,17 @@ public partial class MainWindow : Window
         WslModeOption.IsEnabled = enabled;
         VmModeOption.IsEnabled = enabled;
         ApplyButton.IsEnabled = enabled;
+    }
+
+    private static BitmapImage LoadRockerImage(string fileName)
+    {
+        var image = new BitmapImage();
+        image.BeginInit();
+        image.UriSource = new Uri($"pack://application:,,,/Assets/{fileName}", UriKind.Absolute);
+        image.CacheOption = BitmapCacheOption.OnLoad;
+        image.EndInit();
+        image.Freeze();
+        return image;
     }
 
     private void CancelButton_Click(object sender, RoutedEventArgs e) => Close();
