@@ -1,0 +1,159 @@
+<Window x:Class="HyperSwitch.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="HyperSwitch"
+        Width="840"
+        Height="610"
+        MinWidth="720"
+        MinHeight="560"
+        WindowStartupLocation="CenterScreen"
+        Background="#FAFCFF">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="82" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="44,34,44,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Text="Cambiar modo de hipervisor"
+                       FontSize="34"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource PrimaryTextBrush}"
+                       HorizontalAlignment="Center" />
+
+            <Border Grid.Row="1"
+                    Margin="68,28,68,0"
+                    Padding="8"
+                    CornerRadius="25"
+                    Background="#DDE3EC"
+                    BorderBrush="#AEB8C6"
+                    BorderThickness="1">
+                <Border.Effect>
+                    <DropShadowEffect Color="#708096" BlurRadius="18" ShadowDepth="5" Opacity="0.25" />
+                </Border.Effect>
+                <Grid Height="166">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <RadioButton x:Name="WslModeOption"
+                                 Grid.Column="0"
+                                 GroupName="HypervisorMode"
+                                 Style="{StaticResource ModeOptionStyle}"
+                                 Checked="ModeOption_Checked"
+                                 AutomationProperties.Name="Modo WSL">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Border Width="68" Height="68" CornerRadius="34" Background="#22FFFFFF">
+                                <TextBlock Text="WSL"
+                                           FontSize="20"
+                                           FontWeight="Bold"
+                                           Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" />
+                            </Border>
+                            <TextBlock Text="Hipervisor activo"
+                                       Margin="0,12,0,0"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
+                                       HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton x:Name="VmModeOption"
+                                 Grid.Column="1"
+                                 Margin="8,0,0,0"
+                                 GroupName="HypervisorMode"
+                                 Style="{StaticResource ModeOptionStyle}"
+                                 Checked="ModeOption_Checked"
+                                 AutomationProperties.Name="Modo máquinas virtuales">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Border Width="68" Height="68" CornerRadius="12" Background="#16000000">
+                                <Grid Width="42" Height="34">
+                                    <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
+                                            BorderThickness="4"
+                                            CornerRadius="3" />
+                                    <Rectangle Width="18" Height="4"
+                                               Margin="0,35,0,0"
+                                               Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
+                                </Grid>
+                            </Border>
+                            <TextBlock Text="Hipervisor desactivado"
+                                       Margin="0,12,0,0"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
+                                       HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </RadioButton>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="2" Margin="65,22,65,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Text="Modo WSL" FontSize="25" FontWeight="Bold"
+                               Foreground="{StaticResource PrimaryTextBrush}" HorizontalAlignment="Center" />
+                    <TextBlock Text="WSL 2  •  Docker  •  Hyper-V" Margin="0,5,0,0" FontSize="15"
+                               Foreground="{StaticResource SecondaryTextBrush}" HorizontalAlignment="Center" />
+                    <Border x:Name="WslActiveBadge" Margin="0,12,0,0" Padding="12,5" CornerRadius="16"
+                            Background="#D8ECFF" Visibility="Collapsed" HorizontalAlignment="Center">
+                        <TextBlock Text="●  Activo ahora" Foreground="{StaticResource AccentBrush}" FontWeight="SemiBold" />
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                    <TextBlock Text="Modo VM" FontSize="25" FontWeight="Bold"
+                               Foreground="{StaticResource PrimaryTextBrush}" HorizontalAlignment="Center" />
+                    <TextBlock Text="VirtualBox  •  VMware  •  VM clásicas" Margin="0,5,0,0" FontSize="15"
+                               Foreground="{StaticResource SecondaryTextBrush}" HorizontalAlignment="Center" />
+                    <Border x:Name="VmActiveBadge" Margin="0,12,0,0" Padding="12,5" CornerRadius="16"
+                            Background="#D8ECFF" Visibility="Collapsed" HorizontalAlignment="Center">
+                        <TextBlock Text="●  Activo ahora" Foreground="{StaticResource AccentBrush}" FontWeight="SemiBold" />
+                    </Border>
+                </StackPanel>
+            </Grid>
+
+            <Border Grid.Row="3" Margin="0,24,0,0" BorderBrush="{StaticResource LineBrush}" BorderThickness="0,1,0,0" />
+
+            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,17,0,0">
+                <TextBlock Text="ⓘ" FontSize="18" Foreground="{StaticResource SecondaryTextBrush}" Margin="0,0,9,0" />
+                <TextBlock x:Name="StatusText"
+                           Text="El cambio requiere reiniciar Windows."
+                           FontSize="14"
+                           Foreground="{StaticResource SecondaryTextBrush}"
+                           VerticalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+
+        <Border Grid.Row="1" Background="#F4F7FB" BorderBrush="{StaticResource LineBrush}" BorderThickness="0,1,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0">
+                <Button x:Name="ApplyButton"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Click="ApplyButton_Click"
+                        IsDefault="True">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="✓" FontSize="19" Margin="0,-2,10,0" />
+                        <TextBlock Text="Aplicar" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+                <Button Content="Cancelar" Margin="14,0,0,0" Padding="22,11" FontSize="15"
+                        IsCancel="True" Click="CancelButton_Click" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
