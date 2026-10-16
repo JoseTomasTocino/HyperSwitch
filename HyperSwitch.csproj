@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>HyperSwitch</AssemblyName>
     <RootNamespace>HyperSwitch</RootNamespace>
+    <Version>1.0.1</Version>
     <ApplicationIcon>Assets\HyperSwitch.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
