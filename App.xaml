@@ -14,37 +14,109 @@
             <SolidColorBrush x:Key="PanelBrush" Color="#F5F8FC" />
             <SolidColorBrush x:Key="LineBrush" Color="#D9E0E9" />
 
+            <LinearGradientBrush x:Key="RockerFaceInactiveBrush" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#FFFFFF" Offset="0" />
+                <GradientStop Color="#F4F6FA" Offset="0.48" />
+                <GradientStop Color="#DCE1E9" Offset="1" />
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="RockerFaceActiveBrush" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#24A2FF" Offset="0" />
+                <GradientStop Color="#0879F4" Offset="0.45" />
+                <GradientStop Color="#0058CF" Offset="1" />
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="RockerDepthInactiveBrush" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#AEB7C4" Offset="0" />
+                <GradientStop Color="#667181" Offset="1" />
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="RockerDepthActiveBrush" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#064BBA" Offset="0" />
+                <GradientStop Color="#012969" Offset="1" />
+            </LinearGradientBrush>
+
             <Style x:Key="ModeOptionStyle" TargetType="RadioButton">
-                <Setter Property="Background" Value="#F5F7FA" />
-                <Setter Property="BorderBrush" Value="#BFC8D5" />
+                <Setter Property="Background" Value="{StaticResource RockerFaceInactiveBrush}" />
+                <Setter Property="BorderBrush" Value="#E8ECF2" />
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}" />
                 <Setter Property="Cursor" Value="Hand" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="RadioButton">
-                            <Border x:Name="Card"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="18"
-                                    Padding="18">
-                                <Grid>
+                            <Grid Margin="3,2,3,3">
+                                <Border x:Name="KeyDepth"
+                                        Margin="0,14,0,0"
+                                        Background="{StaticResource RockerDepthInactiveBrush}"
+                                        BorderBrush="#596474"
+                                        BorderThickness="1"
+                                        CornerRadius="24" />
+                                <Border x:Name="KeyFace"
+                                        Margin="0,0,0,13"
+                                        Padding="18"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="24"
+                                        RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
+                                        <TranslateTransform Y="6" />
+                                    </Border.RenderTransform>
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="#25364C"
+                                                          BlurRadius="8"
+                                                          Direction="270"
+                                                          ShadowDepth="3"
+                                                          Opacity="0.24" />
+                                    </Border.Effect>
+                                    <Grid>
+                                        <Border x:Name="Gloss"
+                                                Height="58"
+                                                Margin="1"
+                                                VerticalAlignment="Top"
+                                                CornerRadius="21,21,9,9"
+                                                IsHitTestVisible="False"
+                                                Opacity="0.7">
+                                            <Border.Background>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                    <GradientStop Color="#AFFFFFFF" Offset="0" />
+                                                    <GradientStop Color="#28FFFFFF" Offset="0.7" />
+                                                    <GradientStop Color="#00FFFFFF" Offset="1" />
+                                                </LinearGradientBrush>
+                                            </Border.Background>
+                                        </Border>
                                     <ContentPresenter HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center" />
-                                </Grid>
-                            </Border>
+                                                          VerticalAlignment="Center" />
+                                    </Grid>
+                                </Border>
+                            </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsChecked" Value="True">
-                                    <Setter TargetName="Card" Property="Background" Value="{StaticResource AccentBrush}" />
-                                    <Setter TargetName="Card" Property="BorderBrush" Value="#4AA2FF" />
+                                    <Setter TargetName="KeyFace" Property="Background" Value="{StaticResource RockerFaceActiveBrush}" />
+                                    <Setter TargetName="KeyFace" Property="BorderBrush" Value="#6FC9FF" />
+                                    <Setter TargetName="KeyDepth" Property="Background" Value="{StaticResource RockerDepthActiveBrush}" />
+                                    <Setter TargetName="KeyDepth" Property="BorderBrush" Value="#061C45" />
+                                    <Setter TargetName="KeyFace" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <TranslateTransform Y="-2" />
+                                        </Setter.Value>
+                                    </Setter>
                                     <Setter Property="Foreground" Value="White" />
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="Card" Property="BorderBrush" Value="#68A9F5" />
+                                    <Setter TargetName="Gloss" Property="Opacity" Value="0.95" />
+                                    <Setter TargetName="KeyFace" Property="BorderBrush" Value="#72C5FF" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="KeyFace" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <TranslateTransform Y="7" />
+                                        </Setter.Value>
+                                    </Setter>
                                 </Trigger>
                                 <Trigger Property="IsKeyboardFocused" Value="True">
-                                    <Setter TargetName="Card" Property="BorderThickness" Value="2" />
+                                    <Setter TargetName="KeyFace" Property="BorderThickness" Value="2" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.55" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
