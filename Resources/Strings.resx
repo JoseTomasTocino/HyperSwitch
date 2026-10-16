@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="AppTitle" xml:space="preserve"><value>HyperSwitch</value></data>
+  <data name="Heading" xml:space="preserve"><value>Cambiar modo de hipervisor</value></data>
+  <data name="WslAutomationName" xml:space="preserve"><value>Modo WSL</value></data>
+  <data name="VmAutomationName" xml:space="preserve"><value>Modo máquinas virtuales</value></data>
+  <data name="ModeWsl" xml:space="preserve"><value>Modo WSL</value></data>
+  <data name="WslDescription" xml:space="preserve"><value>WSL 2  •  Docker  •  Hyper-V</value></data>
+  <data name="ModeVm" xml:space="preserve"><value>Modo VM</value></data>
+  <data name="VmDescription" xml:space="preserve"><value>VirtualBox  •  VMware  •  VM clásicas</value></data>
+  <data name="ActiveNow" xml:space="preserve"><value>●  Activo ahora</value></data>
+  <data name="StatusRestartRequired" xml:space="preserve"><value>El cambio requiere reiniciar Windows.</value></data>
+  <data name="Apply" xml:space="preserve"><value>Aplicar</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Cancelar</value></data>
+  <data name="StatusPendingCanReplace" xml:space="preserve"><value>Hay un cambio pendiente. Puedes sustituirlo antes de reiniciar.</value></data>
+  <data name="StatusPendingRestart" xml:space="preserve"><value>Cambio guardado. Reinicia Windows para activar el nuevo modo.</value></data>
+  <data name="StatusWillApplyNextRestart" xml:space="preserve"><value>El cambio se aplicará en el próximo reinicio de Windows.</value></data>
+  <data name="StatusCurrentMode" xml:space="preserve"><value>Este es el modo activo actualmente.</value></data>
+  <data name="StatusRequestingAdmin" xml:space="preserve"><value>Solicitando permisos de administrador…</value></data>
+  <data name="StatusApplyFailed" xml:space="preserve"><value>No se pudo aplicar el cambio.</value></data>
+  <data name="RestartPrompt" xml:space="preserve"><value>El cambio se ha guardado correctamente, pero necesita un reinicio para surtir efecto.&#xA;&#xA;¿Quieres reiniciar Windows ahora?</value></data>
+  <data name="ChangeAppliedTitle" xml:space="preserve"><value>Cambio aplicado</value></data>
+  <data name="StatusUacCancelled" xml:space="preserve"><value>Se canceló la solicitud de permisos de administrador.</value></data>
+  <data name="AdminRequestFailed" xml:space="preserve"><value>No se pudo solicitar permisos de administrador.&#xA;&#xA;{0}</value></data>
+  <data name="InvalidMode" xml:space="preserve"><value>HyperSwitch recibió un modo de hipervisor no válido.</value></data>
+  <data name="ExecutableNotFound" xml:space="preserve"><value>No se pudo localizar el ejecutable de HyperSwitch.</value></data>
+  <data name="ElevatedProcessStartFailed" xml:space="preserve"><value>No se pudo iniciar el proceso con permisos de administrador.</value></data>
+  <data name="RestartComment" xml:space="preserve"><value>HyperSwitch aplicó el nuevo modo de hipervisor.</value></data>
+  <data name="BcdEditStartFailed" xml:space="preserve"><value>No se pudo iniciar BCDEdit.</value></data>
+  <data name="BcdEditExitFailed" xml:space="preserve"><value>BCDEdit terminó con el código {0}.&#xA;&#xA;{1}</value></data>
+  <data name="ApplyConfigurationFailed" xml:space="preserve"><value>No se pudo cambiar la configuración de arranque.&#xA;&#xA;{0}</value></data>
+  <data name="HypervisorStatusUnavailable" xml:space="preserve"><value>Windows no devolvió el estado de Win32_ComputerSystem.HypervisorPresent.</value></data>
+</root>

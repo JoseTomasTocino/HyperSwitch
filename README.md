@@ -7,6 +7,8 @@ Pequeña utilidad para Windows 11 que alterna entre:
 
 La aplicación consulta el estado actual sin elevación. Solo solicita permisos de administrador al aplicar el cambio. Después de que BCDEdit confirme la operación, permite elegir entre reiniciar inmediatamente o hacerlo más tarde.
 
+La interfaz está disponible en español e inglés y selecciona automáticamente el idioma de interfaz de Windows. Para cualquier otro idioma se utiliza español como alternativa.
+
 ## Funcionamiento
 
 1. HyperSwitch consulta `Win32_ComputerSystem.HypervisorPresent` para detectar si el hipervisor está activo en la sesión actual.

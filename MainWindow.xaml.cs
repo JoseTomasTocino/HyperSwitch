@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using HyperSwitch.Localization;
 using HyperSwitch.Models;
 using HyperSwitch.Services;
 
@@ -51,14 +52,14 @@ public partial class MainWindow : Window
         if (_configuredMode.HasValue && _configuredMode.Value != _currentMode)
         {
             StatusText.Text = changed
-                ? "Hay un cambio pendiente. Puedes sustituirlo antes de reiniciar."
-                : "Cambio guardado. Reinicia Windows para activar el nuevo modo.";
+                ? Strings.StatusPendingCanReplace
+                : Strings.StatusPendingRestart;
             return;
         }
 
         StatusText.Text = changed
-            ? "El cambio se aplicará en el próximo reinicio de Windows."
-            : "Este es el modo activo actualmente.";
+            ? Strings.StatusWillApplyNextRestart
+            : Strings.StatusCurrentMode;
     }
 
     private async void ApplyButton_Click(object sender, RoutedEventArgs e)
@@ -67,12 +68,12 @@ public partial class MainWindow : Window
         {
             var requestedMode = SelectedMode;
             SetControlsEnabled(false);
-            StatusText.Text = "Solicitando permisos de administrador…";
+            StatusText.Text = Strings.StatusRequestingAdmin;
 
             var exitCode = await ElevatedCommandHandler.ApplyElevatedAsync(requestedMode);
             if (exitCode != 0)
             {
-                StatusText.Text = "No se pudo aplicar el cambio.";
+                StatusText.Text = Strings.StatusApplyFailed;
                 return;
             }
 
@@ -80,9 +81,8 @@ public partial class MainWindow : Window
             UpdateSelectionState();
 
             var restart = MessageBox.Show(
-                "El cambio se ha guardado correctamente, pero necesita un reinicio para surtir efecto.\n\n" +
-                "¿Quieres reiniciar Windows ahora?",
-                "Cambio aplicado",
+                Strings.RestartPrompt,
+                Strings.ChangeAppliedTitle,
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Information,
                 MessageBoxResult.No);
@@ -95,13 +95,13 @@ public partial class MainWindow : Window
         }
         catch (Win32Exception exception) when (exception.NativeErrorCode == 1223)
         {
-            StatusText.Text = "Se canceló la solicitud de permisos de administrador.";
+            StatusText.Text = Strings.StatusUacCancelled;
         }
         catch (Exception exception)
         {
             MessageBox.Show(
-                "No se pudo solicitar permisos de administrador.\n\n" + exception.Message,
-                "HyperSwitch",
+                string.Format(Strings.AdminRequestFailed, exception.Message),
+                Strings.AppTitle,
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
         }

@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using HyperSwitch.Localization;
 using HyperSwitch.Models;
 
 namespace HyperSwitch.Services;
@@ -20,7 +21,7 @@ public static class ElevatedCommandHandler
 
         if (!Enum.TryParse<HypervisorMode>(arguments[1], ignoreCase: true, out var mode))
         {
-            ShowError("HyperSwitch recibió un modo de hipervisor no válido.");
+            ShowError(Strings.InvalidMode);
             exitCode = 2;
             return true;
         }
@@ -34,7 +35,7 @@ public static class ElevatedCommandHandler
         var executablePath = Environment.ProcessPath;
         if (string.IsNullOrWhiteSpace(executablePath))
         {
-            throw new InvalidOperationException("No se pudo localizar el ejecutable de HyperSwitch.");
+            throw new InvalidOperationException(Strings.ExecutableNotFound);
         }
 
         using var process = Process.Start(new ProcessStartInfo
@@ -43,7 +44,7 @@ public static class ElevatedCommandHandler
             Arguments = $"{ApplyArgument} {mode}",
             UseShellExecute = true,
             Verb = "runas"
-        }) ?? throw new InvalidOperationException("No se pudo iniciar el proceso con permisos de administrador.");
+        }) ?? throw new InvalidOperationException(Strings.ElevatedProcessStartFailed);
 
         await process.WaitForExitAsync();
         return process.ExitCode;
@@ -57,7 +58,7 @@ public static class ElevatedCommandHandler
         Process.Start(new ProcessStartInfo
         {
             FileName = shutdownPath,
-            Arguments = "/r /t 5 /c \"HyperSwitch aplicó el nuevo modo de hipervisor.\"",
+            Arguments = $"/r /t 5 /c \"{Strings.RestartComment}\"",
             UseShellExecute = false,
             CreateNoWindow = true
         });
@@ -83,7 +84,7 @@ public static class ElevatedCommandHandler
 
             if (process is null)
             {
-                throw new InvalidOperationException("No se pudo iniciar BCDEdit.");
+                throw new InvalidOperationException(Strings.BcdEditStartFailed);
             }
 
             var standardOutput = process.StandardOutput.ReadToEnd();
@@ -93,21 +94,21 @@ public static class ElevatedCommandHandler
             if (process.ExitCode != 0)
             {
                 var details = string.IsNullOrWhiteSpace(standardError) ? standardOutput : standardError;
-                throw new InvalidOperationException(
-                    $"BCDEdit terminó con el código {process.ExitCode}.\n\n{details.Trim()}");
+                throw new InvalidOperationException(string.Format(
+                    Strings.BcdEditExitFailed,
+                    process.ExitCode,
+                    details.Trim()));
             }
 
             return true;
         }
         catch (Exception exception)
         {
-            ShowError(
-                "No se pudo cambiar la configuración de arranque.\n\n" +
-                exception.Message);
+            ShowError(string.Format(Strings.ApplyConfigurationFailed, exception.Message));
             return false;
         }
     }
 
     private static void ShowError(string message) =>
-        MessageBox.Show(message, "HyperSwitch", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show(message, Strings.AppTitle, MessageBoxButton.OK, MessageBoxImage.Error);
 }

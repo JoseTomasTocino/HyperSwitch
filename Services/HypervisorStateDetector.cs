@@ -1,4 +1,5 @@
 using System.Management;
+using HyperSwitch.Localization;
 using HyperSwitch.Models;
 
 namespace HyperSwitch.Services;
@@ -25,7 +26,6 @@ public static class HypervisorStateDetector
             }
         }
 
-        throw new InvalidOperationException(
-            "Windows no devolvió el estado de Win32_ComputerSystem.HypervisorPresent.");
+        throw new InvalidOperationException(Strings.HypervisorStatusUnavailable);
     }
 }
