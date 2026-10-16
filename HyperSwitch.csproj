@@ -17,4 +17,8 @@
     <PublishReadyToRun>false</PublishReadyToRun>
     <DebugType>embedded</DebugType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Management" Version="10.0.13" />
+  </ItemGroup>
 </Project>

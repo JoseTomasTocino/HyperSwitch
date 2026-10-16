@@ -9,7 +9,7 @@ La aplicación consulta el estado actual sin elevación. Solo solicita permisos 
 
 ## Funcionamiento
 
-1. HyperSwitch detecta si el hipervisor de Windows está activo en la sesión actual.
+1. HyperSwitch consulta `Win32_ComputerSystem.HypervisorPresent` para detectar si el hipervisor está activo en la sesión actual.
 2. El usuario selecciona el modo deseado y pulsa **Aplicar**.
 3. Windows solicita elevación mediante UAC para modificar la entrada de arranque actual.
 4. Una vez guardado el cambio, HyperSwitch pregunta si se desea reiniciar en ese momento.

@@ -1,19 +1,31 @@
-using System.Runtime.InteropServices;
+using System.Management;
 using HyperSwitch.Models;
 
 namespace HyperSwitch.Services;
 
 public static class HypervisorStateDetector
 {
-    // PF_HYPERVISOR_PRESENT: Windows reports whether a hypervisor is active now.
-    private const uint PfHypervisorPresent = 28;
+    public static HypervisorMode GetCurrentMode()
+    {
+        using var searcher = new ManagementObjectSearcher(
+            "root\\CIMV2",
+            "SELECT HypervisorPresent FROM Win32_ComputerSystem");
+        using var systems = searcher.Get();
 
-    public static HypervisorMode GetCurrentMode() =>
-        IsProcessorFeaturePresent(PfHypervisorPresent)
-            ? HypervisorMode.Wsl
-            : HypervisorMode.VirtualMachines;
+        foreach (ManagementObject system in systems)
+        {
+            using (system)
+            {
+                if (system["HypervisorPresent"] is bool hypervisorPresent)
+                {
+                    return hypervisorPresent
+                        ? HypervisorMode.Wsl
+                        : HypervisorMode.VirtualMachines;
+                }
+            }
+        }
 
-    [DllImport("kernel32.dll")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static extern bool IsProcessorFeaturePresent(uint processorFeature);
+        throw new InvalidOperationException(
+            "Windows no devolvió el estado de Win32_ComputerSystem.HypervisorPresent.");
+    }
 }
