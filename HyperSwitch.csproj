@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>HyperSwitch</AssemblyName>
     <RootNamespace>HyperSwitch</RootNamespace>
+    <ApplicationIcon>Assets\HyperSwitch.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
@@ -23,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\HyperSwitch.ico" />
     <Resource Include="Assets\rocker-vm.png" />
     <Resource Include="Assets\rocker-wsl.png" />
   </ItemGroup>
