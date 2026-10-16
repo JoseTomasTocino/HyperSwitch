@@ -1,5 +1,7 @@
 # HyperSwitch
 
+![HyperSwitch en inglés](docs/images/hyperswitch-en.png)
+
 Pequeña utilidad para Windows 11 que alterna entre:
 
 - **Modo WSL**: inicia el hipervisor de Windows (`hypervisorlaunchtype Auto`) para WSL 2, Docker y Hyper-V.
